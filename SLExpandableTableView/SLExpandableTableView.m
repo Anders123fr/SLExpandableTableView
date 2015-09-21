@@ -232,7 +232,7 @@ static BOOL protocol_containsSelector(Protocol *protocol, SEL selector)
 		 */
 		 
         NSMutableArray *insertArray = [NSMutableArray array];
-        for (int i = 1; i < newRowCount; i++) {
+        for (int i = 0; i < newRowCount; i++) {
             [insertArray addObject:[NSIndexPath indexPathForRow:i inSection:section] ];
         }
 
