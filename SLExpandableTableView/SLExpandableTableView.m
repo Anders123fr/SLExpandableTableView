@@ -418,7 +418,7 @@ static BOOL protocol_containsSelector(Protocol *protocol, SEL selector)
         if ([self.showingSectionsDictionary[key] boolValue]) {
             return [self.myDataSource tableView:tableView numberOfRowsInSection:section];
         } else {
-            return 1;
+            return 0;
         }
     } else {
         self.expandableSectionsDictionary[key] = @NO;
