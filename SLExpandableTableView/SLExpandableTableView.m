@@ -200,7 +200,7 @@ static BOOL protocol_containsSelector(Protocol *protocol, SEL selector)
         return;
     }
 
-    [self deselectRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:section] animated:NO];
+	//[self deselectRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:section] animated:NO];
 
     if ([self.myDataSource tableView:self needsToDownloadDataForExpandableSection:section]) {
         // data is still not ready to be displayed, return
@@ -225,10 +225,12 @@ static BOOL protocol_containsSelector(Protocol *protocol, SEL selector)
     if (animated && newRowCount <= self.maximumRowCountToStillUseAnimationWhileExpanding) {
         [self beginUpdates];
 
+		/*
         UITableViewCell<UIExpandingTableViewCell> *cell = (UITableViewCell<UIExpandingTableViewCell> *)[self cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:section]];
         cell.loading = NO;
         [cell setExpansionStyle:UIExpansionStyleExpanded animated:YES];
-
+		 */
+		 
         NSMutableArray *insertArray = [NSMutableArray array];
         for (int i = 1; i < newRowCount; i++) {
             [insertArray addObject:[NSIndexPath indexPathForRow:i inSection:section] ];
@@ -271,8 +273,9 @@ static BOOL protocol_containsSelector(Protocol *protocol, SEL selector)
         [self.myDelegate tableView:self willCollapseSection:section animated:animated];
     }
 
-    [self deselectRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:section] animated:NO];
+	//[self deselectRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:section] animated:NO];
 
+	
     self.animatingSectionsDictionary[key] = @YES;
 
     // update the showing state
@@ -283,12 +286,14 @@ static BOOL protocol_containsSelector(Protocol *protocol, SEL selector)
     if (animated && newRowCount <= self.maximumRowCountToStillUseAnimationWhileExpanding) {
         [self beginUpdates];
 
+		/*
         UITableViewCell<UIExpandingTableViewCell> *cell = (UITableViewCell<UIExpandingTableViewCell> *)[self cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:section]];
         cell.loading = NO;
         [cell setExpansionStyle:UIExpansionStyleCollapsed animated:YES];
-
+		 */
+		 
         NSMutableArray *deleteArray = [NSMutableArray array];
-        for (int i = 1; i < newRowCount; i++) {
+        for (int i = 0; i < newRowCount; i++) {
             [deleteArray addObject:[NSIndexPath indexPathForRow:i inSection:section] ];
         }
 
