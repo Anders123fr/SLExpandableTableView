@@ -387,23 +387,8 @@ static BOOL protocol_containsSelector(Protocol *protocol, SEL selector)
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
 	NSNumber *key = @(indexPath.section);
 	if ([self.expandableSectionsDictionary[key] boolValue]) {
-		// section is expandable
-		if (indexPath.row == 0) {
-			// expand cell got clicked
-			if ([self.myDataSource tableView:self needsToDownloadDataForExpandableSection:indexPath.section]) {
-				// we need to download some data first
-				[self downloadDataInSection:indexPath.section];
-			} else {
-				if ([self.showingSectionsDictionary[key] boolValue]) {
-					[self collapseSection:indexPath.section animated:YES];
-				} else {
-					[self expandSection:indexPath.section animated:YES];
-				}
-			}
-		} else {
-			if ([self.myDelegate respondsToSelector:@selector(tableView:didSelectRowAtIndexPath:)]) {
-				[self.myDelegate tableView:tableView didSelectRowAtIndexPath:[NSIndexPath indexPathForRow:indexPath.row inSection:indexPath.section] ];
-			}
+		if ([self.myDelegate respondsToSelector:@selector(tableView:didSelectRowAtIndexPath:)]) {
+			[self.myDelegate tableView:tableView didSelectRowAtIndexPath:[NSIndexPath indexPathForRow:indexPath.row inSection:indexPath.section] ];
 		}
 	} else {
 		if ([self.myDelegate respondsToSelector:@selector(tableView:didSelectRowAtIndexPath:)]) {
